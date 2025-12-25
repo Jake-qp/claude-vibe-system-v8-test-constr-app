@@ -1,0 +1,31 @@
+{
+  "$schema": "https://claude.ai/schemas/claude-code-settings.json",
+  "hooks": {
+    "session-start": {
+      "command": ".claude/hooks/session-start.sh"
+    },
+    "PreToolUse": {
+      "command": ".claude/hooks/pre-tool.sh",
+      "tools": ["Bash", "Write", "Edit"]
+    },
+    "PostToolUse": [
+      {
+        "command": ".claude/hooks/protect-files.sh",
+        "tools": ["Write", "Edit"]
+      },
+      {
+        "command": ".claude/hooks/format.sh",
+        "tools": ["Write", "Edit"]
+      }
+    ],
+    "Stop": {
+      "command": ".claude/hooks/checkpoint.sh"
+    },
+    "Notification": {
+      "command": ".claude/hooks/notify.sh"
+    },
+    "context-monitor": {
+      "command": ".claude/hooks/context-monitor.sh"
+    }
+  }
+}
