@@ -1,31 +1,39 @@
 {
-  "$schema": "https://claude.ai/schemas/claude-code-settings.json",
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "hooks": {
-    "session-start": {
-      "command": ".claude/hooks/session-start.sh"
-    },
-    "PreToolUse": {
-      "command": ".claude/hooks/pre-tool.sh",
-      "tools": ["Bash", "Write", "Edit"]
-    },
-    "PostToolUse": [
+    "SessionStart": [
       {
-        "command": ".claude/hooks/protect-files.sh",
-        "tools": ["Write", "Edit"]
-      },
-      {
-        "command": ".claude/hooks/format.sh",
-        "tools": ["Write", "Edit"]
+        "matcher": {},
+        "hooks": [{"type": "command", "command": ".claude/hooks/session-start.sh"}]
       }
     ],
-    "Stop": {
-      "command": ".claude/hooks/checkpoint.sh"
-    },
-    "Notification": {
-      "command": ".claude/hooks/notify.sh"
-    },
-    "context-monitor": {
-      "command": ".claude/hooks/context-monitor.sh"
-    }
+    "PreToolUse": [
+      {
+        "matcher": {"tools": ["Bash", "Write", "Edit"]},
+        "hooks": [{"type": "command", "command": ".claude/hooks/pre-tool.sh"}]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": {"tools": ["Write", "Edit"]},
+        "hooks": [{"type": "command", "command": ".claude/hooks/protect-files.sh"}]
+      },
+      {
+        "matcher": {"tools": ["Write", "Edit"]},
+        "hooks": [{"type": "command", "command": ".claude/hooks/format.sh"}]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": {},
+        "hooks": [{"type": "command", "command": ".claude/hooks/checkpoint.sh"}]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": {},
+        "hooks": [{"type": "command", "command": ".claude/hooks/notify.sh"}]
+      }
+    ]
   }
 }
