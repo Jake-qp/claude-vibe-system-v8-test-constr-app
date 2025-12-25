@@ -3,35 +3,35 @@
   "hooks": {
     "SessionStart": [
       {
-        "matcher": {},
+        "matcher": "",
         "hooks": [{"type": "command", "command": ".claude/hooks/session-start.sh"}]
       }
     ],
     "PreToolUse": [
       {
-        "matcher": {"tools": ["Bash", "Write", "Edit"]},
+        "matcher": "Bash|Write|Edit",
         "hooks": [{"type": "command", "command": ".claude/hooks/pre-tool.sh"}]
       }
     ],
     "PostToolUse": [
       {
-        "matcher": {"tools": ["Write", "Edit"]},
+        "matcher": "Write|Edit",
         "hooks": [{"type": "command", "command": ".claude/hooks/protect-files.sh"}]
       },
       {
-        "matcher": {"tools": ["Write", "Edit"]},
+        "matcher": "Write|Edit",
         "hooks": [{"type": "command", "command": ".claude/hooks/format.sh"}]
       }
     ],
     "Stop": [
       {
-        "matcher": {},
+        "matcher": "",
         "hooks": [{"type": "command", "command": ".claude/hooks/checkpoint.sh"}]
       }
     ],
     "Notification": [
       {
-        "matcher": {},
+        "matcher": "",
         "hooks": [{"type": "command", "command": ".claude/hooks/notify.sh"}]
       }
     ]
